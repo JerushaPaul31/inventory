@@ -1,4 +1,4 @@
-/*'use client'
+'use client'
 import Image from "next/image";
 import {useState, useEffect} from 'react'
 import {firestore} from '../firebase'
@@ -23,63 +23,15 @@ export default function Home() {
     })
     setInventory(inventoryList)
   }
-    */
+    
 // pages/index.js
-import { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { db } from '../lib/firebaseConfig';
-import { Button, TextField, Typography, List, ListItem } from '@mui/material';
-import Auth from '../components/Auth';
-
-export default function Home() {
-  const [item, setItem] = useState('');
-  const [pantryItems, setPantryItems] = useState([]);
-
-  useEffect(() => {
-    const fetchPantryItems = async () => {
-      const querySnapshot = await getDocs(collection(db, 'pantryItems'));
-      const items = querySnapshot.docs.map((doc) => doc.data().name);
-      setPantryItems(items);
-    };
-    fetchPantryItems();
-  }, []);
-
-  const handleAddItem = async () => {
-    try {
-      await addDoc(collection(db, 'pantryItems'), { name: item });
-      setPantryItems([...pantryItems, item]);
-      setItem('');
-    } catch (error) {
-      console.error('Error adding item:', error);
-    }
-  };
-
-  return (
-    <div>
-      <Auth />
-      <Typography variant="h4">Pantry Tracker</Typography>
-      <TextField
-        label="Add Item"
-        value={item}
-        onChange={(e) => setItem(e.target.value)}
-        fullWidth
-      />
-      <Button onClick={handleAddItem} variant="contained">Add</Button>
-      <List>
-        {pantryItems.map((item, index) => (
-          <ListItem key={index}>{item}</ListItem>
-        ))}
-      </List>
-    </div>
-  );
-}
 
 
 
-/*return (
+return (
   <Box>
     <Typography variant = "h1">Inventory Management</Typography>
   </Box>
   )
-  */
+
 
